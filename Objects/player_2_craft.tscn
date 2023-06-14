@@ -1,0 +1,162 @@
+[gd_scene load_steps=20 format=3 uid="uid://dx76er5kiv521"]
+
+[ext_resource type="Script" path="res://Scripts/player_2_craft.gd" id="1_ik5rf"]
+[ext_resource type="Texture2D" uid="uid://b32stl60do0yw" path="res://Assets/Main Ship - Engines - Base Engine.png" id="2_ol0u6"]
+[ext_resource type="Texture2D" uid="uid://cef3tmch8hekv" path="res://Assets/Main Ship - Base - Full health.png" id="3_1lm8b"]
+[ext_resource type="Texture2D" uid="uid://b3b3b1us4sqkm" path="res://Assets/Main Ship - Base - Slight damage.png" id="4_kaj8r"]
+[ext_resource type="Texture2D" uid="uid://dfyyq8p8t56kg" path="res://Assets/Main Ship - Base - Damaged.png" id="5_lmady"]
+[ext_resource type="Texture2D" uid="uid://cnctfndc33ksc" path="res://Assets/Main Ship - Base - Very damaged.png" id="6_emu21"]
+[ext_resource type="Texture2D" uid="uid://bngogio4t8xtp" path="res://Assets/Main Ship - Engines - Base Engine - Spritesheet.png" id="7_1wnii"]
+[ext_resource type="Texture2D" uid="uid://f8c13d3tcwpa" path="res://Assets/Main Ship - Engines - Base Engine - Powering.png" id="8_scpew"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5u12l"]
+radius = 16.0
+height = 36.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f40j2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1lm8b")
+}],
+"loop": true,
+"name": &"damage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kaj8r")
+}],
+"loop": true,
+"name": &"damage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lmady")
+}],
+"loop": true,
+"name": &"damage_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_emu21")
+}],
+"loop": true,
+"name": &"damage_3",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sevi7"]
+atlas = ExtResource("7_1wnii")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p215"]
+atlas = ExtResource("8_scpew")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab814"]
+atlas = ExtResource("8_scpew")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqv57"]
+atlas = ExtResource("8_scpew")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8qi6"]
+atlas = ExtResource("8_scpew")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ocnn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sevi7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p215")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ab814")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqv57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8qi6")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_lkacm"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.85098, 0.164706, 0, 0.882353), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ojp8a"]
+_data = {
+"hit": SubResource("Animation_lkacm")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmfye"]
+radius = 17.0
+height = 38.0
+
+[node name="Player2Craft" type="CharacterBody2D" groups=["player_2", "space_object"]]
+script = ExtResource("1_ik5rf")
+thrust_power = 500
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5u12l")
+
+[node name="Engine" type="Sprite2D" parent="."]
+position = Vector2(-2, 0)
+rotation = 1.5708
+texture = ExtResource("2_ol0u6")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_f40j2")
+animation = &"damage_0"
+
+[node name="Target" type="Node2D" parent="."]
+position = Vector2(17, 0)
+
+[node name="Thrust" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_0ocnn")
+animation = &"idle"
+frame_progress = 0.950996
+
+[node name="HitAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ojp8a")
+}
+
+[node name="DeathZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+rotation = 1.56951
+shape = SubResource("CapsuleShape2D_nmfye")
+
+[connection signal="body_entered" from="DeathZone" to="." method="_on_death_zone_body_entered"]

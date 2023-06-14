@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6vc8j18a51dx"]
+
+[ext_resource type="Script" path="res://Scripts/level_manager.gd" id="1_5y0j7"]
+[ext_resource type="Texture2D" uid="uid://5rda3nu0f12m" path="res://Assets/Starry background  - Layer 01 - Void.png" id="1_i0oxo"]
+[ext_resource type="PackedScene" uid="uid://d1vakx6xpj7fp" path="res://Objects/player_1_craft.tscn" id="1_ujqv1"]
+[ext_resource type="Texture2D" uid="uid://caaqfebm8l0kx" path="res://Assets/Starry background  - Layer 02 - Stars.png" id="2_hcodx"]
+[ext_resource type="PackedScene" uid="uid://cek24s6t7olrw" path="res://Objects/earth.tscn" id="5_31b07"]
+[ext_resource type="PackedScene" uid="uid://dx76er5kiv521" path="res://Objects/player_2_craft.tscn" id="5_va4uf"]
+
+[node name="Level_1" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_5y0j7")
+
+[node name="Space" type="Sprite2D" parent="."]
+modulate = Color(0.0156863, 0.286275, 0.470588, 1)
+position = Vector2(4744, 563)
+scale = Vector2(3.36111, 3.36111)
+texture = ExtResource("1_i0oxo")
+
+[node name="Stars" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.352941)
+position = Vector2(2484.99, 525.25)
+scale = Vector2(3.17639, 3.17639)
+texture = ExtResource("2_hcodx")
+
+[node name="SpaceCrafts" type="Node2D" parent="."]
+
+[node name="Player1Craft" parent="SpaceCrafts" instance=ExtResource("1_ujqv1")]
+position = Vector2(153, 241)
+scale = Vector2(2, 2)
+
+[node name="Player2Craft" parent="SpaceCrafts" instance=ExtResource("5_va4uf")]
+position = Vector2(165, 905)
+scale = Vector2(2, 2)
+
+[node name="Torpedos" type="Node2D" parent="."]
+
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="Earth" parent="." instance=ExtResource("5_31b07")]
+position = Vector2(960, 540)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3huacjn4da0q"]
+
+[ext_resource type="Texture2D" uid="uid://m0h8bdttkrug" path="res://Assets/Asteroid - Flame.png" id="1_1dnic"]
+[ext_resource type="Script" path="res://Scripts/torpedo.gd" id="1_bbgrr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjy8g"]
+atlas = ExtResource("1_1dnic")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mk5s2"]
+atlas = ExtResource("1_1dnic")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w43sx"]
+atlas = ExtResource("1_1dnic")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ny5m5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjy8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mk5s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w43sx")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 18.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkgkf"]
+radius = 4.71405
+
+[node name="Torpedo" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_bbgrr")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 0)
+rotation = -3.14159
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_ny5m5")
+animation = &"fire"
+autoplay = "fire"
+frame = 2
+frame_progress = 0.0792033
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kkgkf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
