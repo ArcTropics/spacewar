@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://ehd22hrkri65"]
+
+[ext_resource type="Texture2D" uid="uid://caaqfebm8l0kx" path="res://Assets/Starry background  - Layer 02 - Stars.png" id="1_fkefq"]
+
+[sub_resource type="Animation" id="Animation_48e1a"]
+resource_name = "twinkle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.196078), Color(1, 1, 1, 0.392157)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_md8n2"]
+_data = {
+"twinkle": SubResource("Animation_48e1a")
+}
+
+[node name="Stars" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(2484.99, 525.25)
+scale = Vector2(3.17639, 3.17639)
+texture = ExtResource("1_fkefq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "twinkle"
+libraries = {
+"": SubResource("AnimationLibrary_md8n2")
+}

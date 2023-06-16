@@ -7,7 +7,7 @@ class_name SpaceCraft
 @export var rotation_speed: float = 3
 @export var life := 3
 @export var max_velocity: Vector2 = Vector2(1000,1000)
-@export var max_thrust_velocity: Vector2 = Vector2(100,100)
+@export var max_thrust_velocity: Vector2 = Vector2(200,200)
 
 var current_direction := Vector2.ZERO
 var current_rotation := 0.0

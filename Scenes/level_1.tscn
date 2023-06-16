@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/level_manager.gd" id="1_5y0j7"]
 [ext_resource type="Texture2D" uid="uid://5rda3nu0f12m" path="res://Assets/Starry background  - Layer 01 - Void.png" id="1_i0oxo"]
 [ext_resource type="PackedScene" uid="uid://d1vakx6xpj7fp" path="res://Objects/player_1_craft.tscn" id="1_ujqv1"]
-[ext_resource type="Texture2D" uid="uid://caaqfebm8l0kx" path="res://Assets/Starry background  - Layer 02 - Stars.png" id="2_hcodx"]
+[ext_resource type="PackedScene" uid="uid://ehd22hrkri65" path="res://Objects/TwinklingStars.tscn" id="3_hym6s"]
 [ext_resource type="PackedScene" uid="uid://cek24s6t7olrw" path="res://Objects/earth.tscn" id="5_31b07"]
 [ext_resource type="PackedScene" uid="uid://dx76er5kiv521" path="res://Objects/player_2_craft.tscn" id="5_va4uf"]
 
@@ -17,11 +17,7 @@ position = Vector2(4744, 563)
 scale = Vector2(3.36111, 3.36111)
 texture = ExtResource("1_i0oxo")
 
-[node name="Stars" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.352941)
-position = Vector2(2484.99, 525.25)
-scale = Vector2(3.17639, 3.17639)
-texture = ExtResource("2_hcodx")
+[node name="TwinklingStars" parent="." instance=ExtResource("3_hym6s")]
 
 [node name="SpaceCrafts" type="Node2D" parent="."]
 
