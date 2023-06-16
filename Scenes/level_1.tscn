@@ -26,21 +26,30 @@ texture = ExtResource("2_hcodx")
 [node name="SpaceCrafts" type="Node2D" parent="."]
 
 [node name="Player1Craft" parent="SpaceCrafts" instance=ExtResource("1_ujqv1")]
-position = Vector2(153, 241)
+position = Vector2(200, 930)
 scale = Vector2(2, 2)
+thrust_power = 100
+rotation_speed = 1.0
 
 [node name="Player2Craft" parent="SpaceCrafts" instance=ExtResource("5_va4uf")]
-position = Vector2(165, 905)
+position = Vector2(1720, 150)
+rotation = 3.14159
 scale = Vector2(2, 2)
+thrust_power = 100
+rotation_speed = 1.0
 
 [node name="Torpedos" type="Node2D" parent="."]
 
 [node name="Explosions" type="Node2D" parent="."]
 
-[node name="Earth" parent="." instance=ExtResource("5_31b07")]
-position = Vector2(960, 540)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="Earth" parent="." instance=ExtResource("5_31b07")]
+position = Vector2(960, 540)
+gravity_power_1 = 300
+gravity_power_2 = 50
+gravity_power_3 = 25
+gravity_power_4 = 5
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

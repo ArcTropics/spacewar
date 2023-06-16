@@ -26,3 +26,7 @@ func _on_player1_dead(obj, _transform):
 
 func _on_timer_timeout():
 	get_tree().reload_current_scene()
+	
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()

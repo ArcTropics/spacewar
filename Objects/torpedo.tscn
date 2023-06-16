@@ -38,6 +38,8 @@ radius = 4.71405
 [node name="Torpedo" type="Area2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_bbgrr")
+speed = 100.0
+hit_range = 10000.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, 0)
@@ -52,4 +54,10 @@ frame_progress = 0.0792033
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kkgkf")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

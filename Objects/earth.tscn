@@ -571,6 +571,9 @@ height = 2352.0
 
 [node name="Earth" type="StaticBody2D"]
 script = ExtResource("1_a83ym")
+gravity_power_2 = 100
+gravity_power_3 = 50
+gravity_power_4 = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ebl8q")
